@@ -196,7 +196,7 @@ class ConfCommands extends DrushCommands implements SiteAliasManagerAwareInterfa
   protected function runDrushCommand($title, $success_message, $alias, $command, $args = [], $options = [], $options_double_dash = []) {
     $this->io()->title($title);
     $process = Drush::drush($alias, $command, $args, $options, $options_double_dash);
-    $success = ($this->io()->isVerbose()) ? $process->run($process->showRealtime(), [$alias->get('site-env')]) : $process->run(null, [$alias->get('site-env')]);
+    $success = ($this->io()->isVerbose()) ? $process->run($process->showRealtime(), $alias->get('envs')) : $process->run(null, $alias->get('envs'));
     if ($success === 0) {
       $this->write($success_message, 'success', TRUE);
     }
